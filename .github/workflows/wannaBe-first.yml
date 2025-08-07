@@ -1,4 +1,4 @@
-name: WannaBe-Test-Build
+name: Publish POSTMAN Report to GitHub Pages
 
 on:
   push:
@@ -6,50 +6,36 @@ on:
       - main
 
 jobs:
-  test-api:
+  run-postman-and-deploy:
     runs-on: ubuntu-latest
-    outputs:
-      report-path: ${{ steps.upload.outputs.report-path }}
+
     steps:
+      # Клонування репозиторію
       - uses: actions/checkout@v4
 
-      - name: Install Node
+      # Встановлення Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "18"
 
-      - name: Install newman
+      # Встановлення Newman і репортера
+      - name: Install Newman and reporter
         run: |
           npm install -g newman
           npm install -g newman-reporter-htmlextra
 
-      - name: Make Directory for results
-        run: mkdir -p testResults
-
-      - name: Run POSTMAN collection
+      # Запуск Postman-колекції
+      - name: Run POSTMAN collection and generate report
         run: |
+          mkdir -p public
           newman run petstore.collection.json \
             -r htmlextra \
-            --reporter-htmlextra-export testResults/htmlreport.html \
+            --reporter-htmlextra-export public/index.html \
             --reporter-htmlextra-darkTheme
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: html-report
-          path: testResults/htmlreport.html
-
-  deploy-report:
-    needs: test-api
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: html-report
-          path: public
-
-      - name: Deploy to GitHub Pages
+      # Деплой звіту на GitHub Pages
+      - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
