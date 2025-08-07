@@ -379,7 +379,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/users?page=1&pageSize=2",
+							"raw": "{{baseUrl}}/users?page=1&pageSize=3",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -393,7 +393,7 @@
 								},
 								{
 									"key": "pageSize",
-									"value": "2"
+									"value": "3"
 								}
 							]
 						}
