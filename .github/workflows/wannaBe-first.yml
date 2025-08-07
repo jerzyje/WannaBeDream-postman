@@ -47,7 +47,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "COLLECTION=${{ github.event.inputs.collection }}" >> $GITHUB_ENV
           else
-            echo "COLLECTION=petstore.collection.json" >> $GITHUB_ENV
+            echo "COLLECTION=store.collection.json" >> $GITHUB_ENV
           fi
 
       - name: Run Newman with selected collection
