@@ -30,9 +30,9 @@ jobs:
         run: |
           mkdir -p public
           newman run petstore.collection.json \
-            -r htmlextra \
-            --reporter-htmlextra-export public/index.html \
-            --reporter-htmlextra-darkTheme
+           -r cli,htmlextra \
+          --reporter-htmlextra-export public/index.html \
+          --reporter-htmlextra-darkTheme
 
       # Деплой звіту на GitHub Pages
       - name: Deploy report to GitHub Pages
