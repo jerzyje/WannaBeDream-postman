@@ -4,6 +4,16 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      collection:
+        description: "Select Postman collection to run"
+        required: false
+        default: "petstore.collection.json"
+        type: choice
+        options:
+          - petstore.collection.json
+          - store.collection.json
 
 jobs:
   run-postman-and-deploy:
@@ -19,22 +29,27 @@ jobs:
         with:
           node-version: "18"
 
-      # Встановлення Newman та репортера
+      # Встановлення Newman і репортера
       - name: Install Newman and Reporter
         run: |
           npm install -g newman
           npm install -g newman-reporter-htmlextra
 
-      # Запуск POSTMAN колекції з генерацією звіту
+      # Встановлення імені колекції (з параметра або дефолт)
+      - name: Set collection name
+        run: |
+          echo "COLLECTION=${{ github.event.inputs.collection || 'petstore.collection.json' }}" >> $GITHUB_ENV
+
+      # Запуск Newman
       - name: Run POSTMAN collection and generate report
         run: |
           mkdir -p public
-          newman run petstore.collection.json \
+          newman run "$COLLECTION" \
             -r cli,htmlextra \
             --reporter-htmlextra-export public/index.html \
             --reporter-htmlextra-darkTheme || true
 
-      # Деплой звіту на GitHub Pages
+      # Публікація на GitHub Pages
       - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
