@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "530f04e1-db55-4eee-8e59-56c922de8887",
 		"name": "WannaBeDream-store",
+		"description": "This is a sample server Store server.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "17584487"
 	},
