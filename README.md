@@ -3,7 +3,7 @@
 ## The repository contains:
 
 1. Local Store server and Postman collection for it
-   --- Routes `/products`, `/orders` and `/users`. Below is a table of supported operations with `products` as example resource. The same operations are also supports for `orders/` and `users/`.
+   - Routes `/products`, `/orders` and `/users`. Below is a table of supported operations with `products` as example resource. The same operations are also supports for `orders/` and `users/`.
 
 | VERB   | Route         | Input      | Output             |
 | ------ | ------------- | ---------- | ------------------ |
@@ -13,7 +13,7 @@
 | PUT    | /products     | **object** | **Updated object** |
 | DELETE | /products/:id | **e.g 3**  | **Deleted object** |
 
---- Tests: Test status code for REST API (200,400 and so on), Test response time
+- Tests: Test status code for REST API (200,400 and so on), Test response time
 
 ### Updated in store.collection.json
 
@@ -71,3 +71,4 @@ You can also start it manually from the Actions tab
 ## Starter collection and challenge here
 
 <a href="https://github.com/WannaBeDream/Postman-newman-ghActions"> /WannaBeDream/Postman-newman-ghActions</a>
+
