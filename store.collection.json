@@ -2,8 +2,7 @@
 	"info": {
 		"_postman_id": "530f04e1-db55-4eee-8e59-56c922de8887",
 		"name": "WannaBeDream-store",
-		"description": "This is a sample server Store server.",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "17584487"
 	},
 	"item": [
@@ -34,15 +33,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/products",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"products"
-							]
-						}
+						"url": "{{baseUrl}}/products"
 					},
 					"response": []
 				},
@@ -51,16 +42,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/products/3",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"products",
-								"3"
-							]
-						}
+						"url": "{{baseUrl}}/products/3"
 					},
 					"response": []
 				},
@@ -78,15 +60,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{baseUrl}}/products",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"products"
-							]
-						}
+						"url": "{{baseUrl}}/products"
 					},
 					"response": []
 				},
@@ -104,15 +78,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{baseUrl}}/products",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"products"
-							]
-						}
+						"url": "{{baseUrl}}/products"
 					},
 					"response": []
 				},
@@ -121,14 +87,80 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"url": "{{baseUrl}}/products/4"
+					},
+					"response": []
+				},
+				{
+					"name": "Get product in Desc order by price",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"// Arrange",
+									"function isSortedDesc(arr, key) {",
+									"    for (let i = 1; i < arr.length; i++) {",
+									"        if (arr[i - 1][key] < arr[i][key]) return false; // DESC: попередній >= поточного",
+									"    }",
+									"    return true;",
+									"}",
+									"",
+									"// Act",
+									"const products = pm.response.json();",
+									"",
+									"// Assert",
+									"pm.test(\"products should be sorted by price DESC\", function () {",
+									"    pm.expect(isSortedDesc(products, 'price')).to.be.true;",
+									"});",
+									"",
+									"// function isSortedAsc(arr, key) {",
+									"//     for (let i = 1; i < arr.length; i++) {",
+									"//         if (arr[i - 1][key] > arr[i][key]) return false; // ASC: попередній <= поточного",
+									"//     }",
+									"//     return true;",
+									"// }",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/products/4",
+							"raw": "{{baseUrl}}/products?sortOrder=DESC&sortKey=price",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"products",
-								"4"
+								"products"
+							],
+							"query": [
+								{
+									"key": "sortOrder",
+									"value": "DESC"
+								},
+								{
+									"key": "sortKey",
+									"value": "price"
+								}
 							]
 						}
 					},
@@ -144,15 +176,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/orders",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"orders"
-							]
-						}
+						"url": "{{baseUrl}}/orders"
 					},
 					"response": []
 				},
@@ -161,16 +185,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/orders/3",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"orders",
-								"3"
-							]
-						}
+						"url": "{{baseUrl}}/orders/3"
 					},
 					"response": []
 				},
@@ -188,15 +203,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{baseUrl}}/orders",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"orders"
-							]
-						}
+						"url": "{{baseUrl}}/orders"
 					},
 					"response": []
 				},
@@ -214,15 +221,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{baseUrl}}/orders",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"orders"
-							]
-						}
+						"url": "{{baseUrl}}/orders"
 					},
 					"response": []
 				},
@@ -231,16 +230,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/orders/4",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"orders",
-								"4"
-							]
-						}
+						"url": "{{baseUrl}}/orders/4"
 					},
 					"response": []
 				}
@@ -251,18 +241,48 @@
 			"item": [
 				{
 					"name": "List users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Arrange",
+									"const schema = {",
+									"    \"type\": \"array\",",
+									"    \"items\": {",
+									"        \"type\": \"object\",",
+									"        \"required\": [\"id\", \"firstName\", \"lastName\", \"email\", \"dateOfBirth\", \"emailVerified\", \"signUpDate\", \"status\", \"level\"],",
+									"        \"properties\": {",
+									"            \"id\": { \"type\": \"integer\" },",
+									"            \"firstName\": { \"type\": \"string\" },",
+									"            \"lastName\": { \"type\": \"string\" },",
+									"            \"email\": { \"type\": \"string\", \"format\": \"email\" },",
+									"            \"dateOfBirth\": { \"type\": \"string\" },",
+									"            \"emailVerified\": { \"type\": \"boolean\" },",
+									"            \"signUpDate\": { \"type\": \"string\" },",
+									"            \"status\": { \"type\": \"string\" },",
+									"            \"level\": { \"type\": \"string\" }",
+									"        }",
+									"    }",
+									"};",
+									"",
+									"// Act",
+									"const users = pm.response.json();",
+									"",
+									"// Assert",
+									"pm.test(\"Response matches JSON schema\", function () {",
+									"    pm.expect(tv4.validate(users, schema)).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/users",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"users"
-							]
-						}
+						"url": "{{baseUrl}}/users"
 					},
 					"response": []
 				},
@@ -271,42 +291,42 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/users/3",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"users",
-								"3"
-							]
-						}
+						"url": "{{baseUrl}}/users/3"
 					},
 					"response": []
 				},
 				{
 					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Response time is less than 100ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(100);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Dream\",\r\n    \"lastName\": \"Real\",\r\n    \"email\": \"dream.real@gmail.com\",\r\n    \"dateOfBirth\": \"2001-10-99\",\r\n    \"emailVerified\": true,\r\n    \"signUpDate\": \"2019-08-24\",\r\n    \"status\": \"active\",\r\n    \"level\": \"lord\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Dum\",\r\n    \"lastName\": \"Just\",\r\n    \"email\": \"dum.just@gmail.com\",\r\n    \"dateOfBirth\": \"2008-11-22\",\r\n    \"emailVerified\": true,\r\n    \"signUpDate\": \"2025-08-24\",\r\n    \"status\": \"active\",\r\n    \"level\": \"consumer\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "{{baseUrl}}/users",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"users"
-							]
-						}
+						"url": "{{baseUrl}}/users"
 					},
 					"response": []
 				},
@@ -317,22 +337,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Ilon\",\r\n    \"lastName\": \"Mask\",\r\n    \"email\": \"ilon.mask@gmail.com\",\r\n    \"dateOfBirth\": \"2001-10-99\",\r\n    \"emailVerified\": true,\r\n    \"signUpDate\": \"2019-08-24\",\r\n    \"status\": \"active\",\r\n    \"level\": \"lord\",\r\n    \"id\": 10\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Ilon\",\r\n    \"lastName\": \"Mask\",\r\n    \"email\": \"ilon.mask@gmail.com\",\r\n    \"dateOfBirth\": \"2001-10-99\",\r\n    \"emailVerified\": true,\r\n    \"signUpDate\": \"2019-08-24\",\r\n    \"status\": \"active\",\r\n    \"level\": \"consummer\",\r\n    \"id\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "{{baseUrl}}/users",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"users"
-							]
-						}
+						"url": "{{baseUrl}}/users"
 					},
 					"response": []
 				},
@@ -341,26 +353,21 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/users/10",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"users",
-								"10"
-							]
-						}
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/users/11"
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "New Tests",
-			"item": [
+				},
 				{
-					"name": "new-get-paginated",
+					"name": "Get paginated users",
 					"event": [
 						{
 							"listen": "test",
@@ -368,6 +375,25 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"// const expectedPageSize = 3;",
+									"// const users = pm.response.json();",
+									"// pm.test(\"Response should contain only 3 users\", function () {",
+									"//     pm.expect(users.length).to.eql(expectedPageSize);",
+									"// });",
+									"",
+									"// Act",
+									"const users = pm.response.json();",
+									"",
+									"// Get `pageSize` from request URL",
+									"const requestUrl = pm.request.url.toString();",
+									"const urlParams = new URLSearchParams(requestUrl.split('?')[1]);",
+									"const expectedPageSize = parseInt(urlParams.get('pageSize'), 10);",
+									"",
+									"// Assert",
+									"pm.test(\"Response should contain expected number of users (pageSize)\", function () {",
+									"    pm.expect(users.length).to.eql(expectedPageSize);",
 									"});",
 									""
 								],
@@ -380,7 +406,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/users?page=1&pageSize=3",
+							"raw": "{{baseUrl}}/users?page=1&pageSize=4",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -394,7 +420,7 @@
 								},
 								{
 									"key": "pageSize",
-									"value": "3"
+									"value": "4"
 								}
 							]
 						}
@@ -402,7 +428,7 @@
 					"response": []
 				},
 				{
-					"name": "new-get-in-descending-order",
+					"name": "Get users in order",
 					"event": [
 						{
 							"listen": "test",
@@ -411,7 +437,22 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.expect(pm.response.code).to.equal(200);",
 									"});",
-									""
+									"",
+									"// Arrange",
+									"function isSortedAsc(arr, key) {",
+									"    for (let i = 1; i < arr.length; i++) {",
+									"        if (arr[i - 1][key].localeCompare(arr[i][key]) > 0) return false;",
+									"    }",
+									"    return true;",
+									"}",
+									"",
+									"// Act",
+									"const users = pm.response.json();",
+									"",
+									"// Assert",
+									"pm.test(\"Users should be sorted by firstName desc\", function () {",
+									"    pm.expect(isSortedAsc(users, 'firstName')).to.be.true;",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -420,8 +461,11 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"packages": {},
-								"type": "text/javascript"
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -429,7 +473,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/users?sortOrder=DESC&sortKey=lastName",
+							"raw": "{{baseUrl}}/users?sortOrder=ASC&sortKey=firstName",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -439,11 +483,11 @@
 							"query": [
 								{
 									"key": "sortOrder",
-									"value": "DESC"
+									"value": "ASC"
 								},
 								{
 									"key": "sortKey",
-									"value": "lastName"
+									"value": "firstName"
 								}
 							]
 						}

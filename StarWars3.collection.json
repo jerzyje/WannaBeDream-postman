@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "760fcad8-1284-4fde-be07-0313b7f67649",
+		"name": "Star Wars ex.3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17584487"
+	},
+	"item": [
+		{
+			"name": "Vehicles T-16",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check max speed\", function ()   // Responce body: JSON value check\r",
+							"{\r",
+							"    var jsonData = pm.response.json(); \r",
+							"    \r",
+							"    \r",
+							"    pm.collectionVariables.set(\"maxAtmospheringSpeed\", jsonData.results[0].max_atmosphering_speed); // Save max speed\r",
+							"    console.log(pm.collectionVariables.get(\"maxAtmospheringSpeed\"))                                 // Show max speed to console\r",
+							"    pm.expect(jsonData.results[0].max_atmosphering_speed).to.eql(\"1200\");                           // max speed = 1200\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Find film\", function ()   // Responce body: JSON value check\r",
+							"{\r",
+							"    var jsonData = pm.response.json(); \r",
+							"    \r",
+							"    pm.collectionVariables.set(\"urlFilmVehicles\", jsonData.results[0].films[0]); // Save film with T-16\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function ()  // Statuse code: Code 200\r",
+							"{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/vehicles/?search=T-16",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"vehicles",
+						""
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "T-16"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Film Vehicle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Find max spacies\", function ()   // Responce body: JSON value check\r",
+							"{\r",
+							"    var jsonData = pm.response.json(); \r",
+							"    \r",
+							"    pm.collectionVariables.set(\"maxSpacies\", jsonData.species[4]); // Save var max Spacies = 5\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function ()  // Statuse code: Code 200\r",
+							"{\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{urlFilmVehicles}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Max Spacies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check name\", function ()   // Responce body: JSON value check\r",
+							"{\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"\r",
+							"    pm.collectionVariables.set(\"findName\", jsonData.name);         // Save var Name = Hutt\r",
+							"    console.log(pm.collectionVariables.get(\"findName\"))            // Show Name = Hutt to console\r",
+							"    pm.expect(jsonData.name).to.eql(\"Hutt\");                       // Name = \"Hutt\"\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check Designation\", function ()   // Responce body: JSON value check\r",
+							"{\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    pm.collectionVariables.set(\"huttDesignation\", jsonData.designation); // Save  var Designation\r",
+							"    pm.expect(jsonData.designation).to.eql(\"sentient\");                  // designation = \"sentient\"  \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check EyeColors\", function ()   // Responce body: JSON value check\r",
+							"{\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    pm.collectionVariables.set(\"huttEyeColors\", jsonData.eye_colors);    // Save  var EyeColors\r",
+							"    pm.expect(jsonData.eye_colors).to.eql(\"yellow, red\");                // eye_colors = \"yellow, red\"\r",
+							"    console.log(pm.collectionVariables.get(\"huttDesignation\"), \" have \", pm.collectionVariables.get(\"huttEyeColors\"), \"eyes\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{maxSpacies}}"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "https://swapi.dev/api/"
+		},
+		{
+			"key": "maxAtmospheringSpeed",
+			"value": ""
+		},
+		{
+			"key": "urlFilmVehicles",
+			"value": ""
+		},
+		{
+			"key": "maxSpacies",
+			"value": ""
+		},
+		{
+			"key": "findName",
+			"value": ""
+		},
+		{
+			"key": "huttDesignation",
+			"value": ""
+		},
+		{
+			"key": "huttEyeColors",
+			"value": ""
+		}
+	]
+}
