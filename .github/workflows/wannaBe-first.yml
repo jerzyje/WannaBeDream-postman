@@ -64,10 +64,12 @@ jobs:
             --reporter-htmlextra-export ./public/index.html \
             --reporter-htmlextra-darkTheme || true
 
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v2
+      - name: Prepare artifact for GitHub Pages
+        uses: actions/deploy-pages@v4
         with:
+          artifact_name: github-pages
           path: ./public
+        id: deployment
 
   deploy:
     needs: build
@@ -82,5 +84,6 @@ jobs:
 
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages
