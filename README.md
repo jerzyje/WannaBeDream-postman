@@ -25,10 +25,7 @@ Added:
 
 2. A collection of tests for the open API - petstore.collection.json (the collection has not been modified and corresponds to the original)
 3. A collection of tests for the open API - StarWars3.collection.json (new collection)
-
--
--
--
+   (tests: Check max speed, Find film and setup in collectionVariables, Get Film Vehicle, Get Max Spacies, Check EyeColors)
 
 ## How to run collection tests with CI
 

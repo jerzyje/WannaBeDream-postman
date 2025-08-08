@@ -67,7 +67,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: github-pages
+          name: pages
           path: ./public
 
   deploy:
@@ -85,4 +85,4 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: github-pages
+          artifact_name: pages
