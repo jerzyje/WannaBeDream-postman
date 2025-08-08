@@ -1,8 +1,8 @@
 # Postman + newman + github pages + Simple store template
 
-## Репозиторій містить:
+## The repository contains:
 
-1. Локальний сервер Store та постман колекцію для нього
+1. Local Store server and Postman collection for it
    --- Routes `/products`, `/orders` and `/users`. Below is a table of supported operations with `products` as example resource. The same operations are also supports for `orders/` and `users/`.
 
 | VERB   | Route         | Input      | Output             |
@@ -13,46 +13,41 @@
 | PUT    | /products     | **object** | **Updated object** |
 | DELETE | /products/:id | **e.g 3**  | **Deleted object** |
 
---- Tests: Test status code for REST API (200,400 and so on) for , Test response time for
+--- Tests: Test status code for REST API (200,400 and so on), Test response time
 
-### Оновлено в store.collection.json
+### Updated in store.collection.json
 
-Додано:
+Added:
 
-- запит users with pagination і тест що Response contains expected number of users
+- Request users with pagination and test that Response contains expected number of users
 - Test sorting by price for product
 - Test that Response matches JSON schema for users
 
-2. Колекцію тестів для відкритого АРІ - petstore.collection.json (колекція не модифікувалась)
-3. Колекцію тестів для відкритого АРІ - StarWars3.collection.json (нова колекція)
+2. A collection of tests for the open API - petstore.collection.json (the collection has not been modified and corresponds to the original)
+3. A collection of tests for the open API - StarWars3.collection.json (new collection)
 
 -
 -
 -
 
-## Як запустити тести колекцій на СI
+## How to run collection tests with CI
 
-Тести можна запустити через пуш на репозиторій і гілку main, або вручну через Actions
+Tests can be run via push to the repository and main branch, or manually via Actions in GitHub
 
-📌 Інструкція для тих, хто зробив форк:
-Форкни цей репозиторій.
+Manual launch instructions via Actions in GitHub for those who have forked:
 
-Перейди у вкладку Actions → Run workflow, вибери колекцію та натисни "Run workflow".
+- Fork this repository (Click "Fork". It is usually in the upper right corner of the page, next to the "Star" and "Watch" buttons.)
+- Go to the Actions → Run workflow tab, select a collection and click "Run workflow".
+- After the test is complete, the report will be automatically deployed to GitHub Pages.
+- Enable GitHub Pages in Settings → Pages by selecting Deploy from GitHub Actions.
+- The report will open at: https://<your-nickname>.github.io/<your-repository>/
 
-Після завершення тесту репорт буде автоматично задеплоєно на GitHub Pages.
+## Report
 
-Активуй GitHub Pages у Settings → Pages, обравши Deploy from GitHub Actions.
+The report is available at the link:
+The report is deployed to a separate branch gh-pages
 
-Репорт відкриється за адресою:
-https://<твій-нік>.github.io/<твій-репозиторій>/
-
-## Звіт
-
-Звіт доступний за посиланням:
-
-Звіт деплоїться на окрему гілку gh-pages
-
-## Як розгорнути локально Store template
+## How to deploy a Store template locally
 
 1. Download this repo.
 2. Run `npm i` (install node.js dependencies)
