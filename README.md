@@ -16,6 +16,7 @@ Added to store.collection.json
 ## Report
 
 The report is available at the link: https://nataliaperchishena.github.io/WannaBeDream-postman/.
+
 The report is deployed to a separate branch gh-pages
 
 ## How to run automated testing and view the report in your fork
@@ -70,6 +71,7 @@ You can also start it manually from the Actions tab
 ## Starter collection and challenge here
 
 <a href="https://github.com/WannaBeDream/Postman-newman-ghActions"> /WannaBeDream/Postman-newman-ghActions</a>
+
 
 
 
