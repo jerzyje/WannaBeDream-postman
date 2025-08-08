@@ -2,30 +2,16 @@
 
 ## The repository contains:
 
-1. Local Store server and Postman collection for it
-   - Routes `/products`, `/orders` and `/users`. Below is a table of supported operations with `products` as example resource. The same operations are also supports for `orders/` and `users/`.
-
-| VERB   | Route         | Input      | Output             |
-| ------ | ------------- | ---------- | ------------------ |
-| GET    | /products     | _None_     | **Array**          |
-| GET    | /products/:id | **e.g 3**  | **Object**         |
-| POST   | /products     | **object** | **Created object** |
-| PUT    | /products     | **object** | **Updated object** |
-| DELETE | /products/:id | **e.g 3**  | **Deleted object** |
-
-- Tests: Test status code for REST API (200,400 and so on), Test response time
+1. Local Store server and Postman collection for it.
+2. petstore.collection.json - а collection of tests for the open API (the collection has not been modified and corresponds to the original)
+3. StarWars3.collection.json - collection of tests for the open API
+(tests included into StarWars3.collection: Check max speed, Find film and setup in collectionVariables, Get Film Vehicle, Get Max Spacies, Check EyeColors)
 
 ### Updated in store.collection.json
-
-Added:
-
+Added to store.collection.json
 - Request users with pagination and test that Response contains expected number of users
 - Test sorting by price for product
 - Test that Response matches JSON schema for users
-
-2. A collection of tests for the open API - petstore.collection.json (the collection has not been modified and corresponds to the original)
-3. A collection of tests for the open API - StarWars3.collection.json (new collection)
-   (tests: Check max speed, Find film and setup in collectionVariables, Get Film Vehicle, Get Max Spacies, Check EyeColors)
 
 ## Report
 
@@ -57,7 +43,6 @@ To be able to run tests and view the report in your GitHub Pages, do the followi
    Once the work is finished, the report will be available in your Pages at link: https://YOUR-USERNAME.github.io/YOUR-FORK/
 
 ### Note
-
 The workflow starts automatically with every push to the main branch of your fork
 You can also start it manually from the Actions tab
 
@@ -68,7 +53,22 @@ You can also start it manually from the Actions tab
 3. Run `npm run tern-on-api`(to run testing server locally )
 4. Upload `store.collection.json` in Postman app.
 
+### Details about local Store server
+   - Routes `/products`, `/orders` and `/users`. Below is a table of supported operations with `products` as example resource. The same operations are also supports for `orders/` and `users/`.
+
+| VERB   | Route         | Input      | Output             |
+| ------ | ------------- | ---------- | ------------------ |
+| GET    | /products     | _None_     | **Array**          |
+| GET    | /products/:id | **e.g 3**  | **Object**         |
+| POST   | /products     | **object** | **Created object** |
+| PUT    | /products     | **object** | **Updated object** |
+| DELETE | /products/:id | **e.g 3**  | **Deleted object** |
+
+- Tests: Test status code for REST API (200,400 and so on), Test response time
+
+
 ## Starter collection and challenge here
 
 <a href="https://github.com/WannaBeDream/Postman-newman-ghActions"> /WannaBeDream/Postman-newman-ghActions</a>
+
 
