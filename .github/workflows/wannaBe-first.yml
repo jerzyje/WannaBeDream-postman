@@ -17,15 +17,13 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
-  build:
+  run-postman-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -36,8 +34,8 @@ jobs:
       - name: Install dependencies (mockApi)
         run: npm install
 
-      - name: Start mock server (only for store.collection)
-        if: ${{ github.event_name == 'push' || github.event.inputs.collection == 'store.collection.json' }}
+      - name: Start mock server in background (only for store.collection)
+        if: ${{ github.event.inputs.collection == 'store.collection.json' || github.event_name == 'push' }}
         run: |
           npm run tern-on-api &
           sleep 5
@@ -58,31 +56,14 @@ jobs:
 
       - name: Run Newman with selected collection
         run: |
-          mkdir -p ./public
+          mkdir -p public
           newman run "$COLLECTION" \
             -r htmlextra \
-            --reporter-htmlextra-export ./public/index.html \
+            --reporter-htmlextra-export public/index.html \
             --reporter-htmlextra-darkTheme || true
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Deploy report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: pages
-          path: ./public
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    permissions:
-      pages: write
-      id-token: write
-
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
-        with:
-          artifact_name: pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

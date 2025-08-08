@@ -27,22 +27,39 @@ Added:
 3. A collection of tests for the open API - StarWars3.collection.json (new collection)
    (tests: Check max speed, Find film and setup in collectionVariables, Get Film Vehicle, Get Max Spacies, Check EyeColors)
 
-## How to run collection tests with CI
-
-Tests can be run via push to the repository and main branch, or manually via Actions in GitHub
-
-Manual launch instructions via Actions in GitHub for those who have forked:
-
-- Fork this repository (Click "Fork". It is usually in the upper right corner of the page, next to the "Star" and "Watch" buttons.)
-- Go to the Actions → Run workflow tab, select a collection and click "Run workflow".
-- After the test is complete, the report will be automatically deployed to GitHub Pages.
-- Enable GitHub Pages in Settings → Pages by selecting Deploy from GitHub Actions.
-- The report will open at: https://<your-nickname>.github.io/<your-repository>/
-
 ## Report
 
-The report is available at the link:
+The report is available at the link: https://nataliaperchishena.github.io/WannaBeDream-postman/
 The report is deployed to a separate branch gh-pages
+
+## How to run automated testing and view the report in your fork
+
+To be able to run tests and view the report in your GitHub Pages, do the following:
+
+1. Fork the repository
+   Click the "Fork" button in the upper right corner → select your GitHub profile or organization.
+2. Enable GitHub Pages
+
+- Go to your fork settings: https://github.com/YOUR-USERNAME/YOUR-FORK/settings/pages
+- In the Build and deployment section:
+  Source: select Deploy from a branch
+  Branch: select gh-pages and / (root)
+  Click Save
+
+3. Run tests manually (optional)
+
+- Go to the Actions tab in your fork
+- Select the workflow "Run POSTMAN with Mock API and Publish Report"
+- Click "Run workflow" (in the upper right corner)
+- Select the desired collection (or leave the default value) → Run workflow
+
+4. View the report
+   Once the work is finished, the report will be available in your Pages at link: https://YOUR-USERNAME.github.io/YOUR-FORK/
+
+### Note
+
+The workflow starts automatically with every push to the main branch of your fork
+You can also start it manually from the Actions tab
 
 ## How to deploy a Store template locally
 
@@ -51,6 +68,6 @@ The report is deployed to a separate branch gh-pages
 3. Run `npm run tern-on-api`(to run testing server locally )
 4. Upload `store.collection.json` in Postman app.
 
-## Початкова колекція та завдання тут
+## Starter collection and challenge here
 
-<a href="https://svitla.com/blog/testing-rest-api-with-postman-and-curl"> Postman & Curl & REST article </a>
+<a href="https://github.com/WannaBeDream/Postman-newman-ghActions"> /WannaBeDream/Postman-newman-ghActions</a>
