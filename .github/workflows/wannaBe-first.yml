@@ -1,6 +1,8 @@
 name: Run POSTMAN with Mock API and Publish Report
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       collection:
@@ -23,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -34,8 +36,8 @@ jobs:
       - name: Install dependencies (mockApi)
         run: npm install
 
-      - name: Start mock server in background (only for store.collection)
-        if: ${{ github.event.inputs.collection == 'store.collection.json' }}
+      - name: Start mock server (only for store.collection)
+        if: ${{ github.event_name == 'push' || github.event.inputs.collection == 'store.collection.json' }}
         run: |
           npm run tern-on-api &
           sleep 5
@@ -48,17 +50,21 @@ jobs:
       - name: Set collection path
         id: set-collection
         run: |
-          echo "COLLECTION=${{ github.event.inputs.collection || 'store.collection.json' }}" >> $GITHUB_ENV
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "COLLECTION=${{ github.event.inputs.collection }}" >> $GITHUB_ENV
+          else
+            echo "COLLECTION=store.collection.json" >> $GITHUB_ENV
+          fi
 
       - name: Run Newman with selected collection
         run: |
           mkdir -p ./public
-          newman run $COLLECTION \
+          newman run "$COLLECTION" \
             -r htmlextra \
             --reporter-htmlextra-export ./public/index.html \
             --reporter-htmlextra-darkTheme || true
 
-      - name: Upload GitHub Pages artifact
+      - name: Upload artifact manually
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
@@ -66,13 +72,14 @@ jobs:
 
   deploy:
     needs: build
-    permissions:
-      pages: write
-      id-token: write
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
+    permissions:
+      pages: write
+      id-token: write
 
     steps:
       - name: Deploy to GitHub Pages
