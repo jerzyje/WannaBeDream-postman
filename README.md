@@ -1,54 +1,64 @@
-# Postman + newman + github actions (Simple store template)
+# Postman + newman + github pages + Simple store template
 
-<a href="https://drive.google.com/file/d/1LQ1uG7Tt70Jubuk5loS4dMSk-1AJ5jzz/view?usp=sharing" /> Intro </a>
+## Репозиторій містить:
 
-## Task steps / First task
-1. Read: 
-- <a href="https://svitla.com/blog/testing-rest-api-with-postman-and-curl"> Postman & Curl & REST article </a> 
-- <a href="https://learning.postman.com/docs/writing-scripts/script-references/test-examples/">Postman tests examples (off doc)</a>
-- <a href="https://drive.google.com/file/d/1ftlfK91TXTS9GH7ufEXsGujop_LpC5ef/view?usp=sharing" /> Manual schema generation </a>
-2. Download this repo.
-3. Run `npm i` (install node.js dependencies)
-4. Run `npm run tern-on-api`(to run testing server locally )
+1. Локальний сервер Store та постман колекцію для нього
+   --- Routes `/products`, `/orders` and `/users`. Below is a table of supported operations with `products` as example resource. The same operations are also supports for `orders/` and `users/`.
 
-### Overview of local server testing
-Routes `/products`, `/orders` and `/users`. Below is a table of supported operations with `products` as example resource. The same operations are also supports for `orders/` and `users/`.
+| VERB   | Route         | Input      | Output             |
+| ------ | ------------- | ---------- | ------------------ |
+| GET    | /products     | _None_     | **Array**          |
+| GET    | /products/:id | **e.g 3**  | **Object**         |
+| POST   | /products     | **object** | **Created object** |
+| PUT    | /products     | **object** | **Updated object** |
+| DELETE | /products/:id | **e.g 3**  | **Deleted object** |
 
-| VERB     |Route          | Input      | Output             |
-|----------|---------------|------------|--------------------|
-| GET      | /products     | *None*     | **Array**          |
-| GET      | /products/:id |  **e.g 3** | **Object**         |
-| POST     | /products     | **object** | **Created object** |
-| PUT      | /products     | **object** | **Updated object** |
-| DELETE   | /products/:id | **e.g 3**  | **Deleted object** |
+--- Tests: Test status code for REST API (200,400 and so on) for , Test response time for
 
+### Оновлено в store.collection.json
 
-5. Upload `store.collection.json` in Postman app. (skip this exhibit in case you decide to use another public API ) 
-6. Make some integration tests in Postman, could be status code/JSON check and so on. ( in case with another API - write tests based on another one).
+Додано:
 
-Examples:
-- Test pagination, by way like `http://localhost:3000/users?page=1&pageSize=2`. 
-- Test sorting, by way like `http://localhost:3000/users?sortOrder=ASC&sortKey=firstName`. You can sort an any resource response using query parameters sortOrder and sortKey.
--  Test status code for REST API (200,400 and so on).
--  Test response time.
--  Test response thanks to json schema validation.
--  Try to follow `AAA` approach (arrange, act, assert).
+- запит users with pagination і тест що Response contains expected number of users
+- Test sorting by price for product
+- Test that Response matches JSON schema for users
 
-7. Save new collection with your new integration tests with the same name as `store.collection.json`. ( in case with another API - another file name for json file)
-8. Push to you github repo in main branch ( in case with local server - save local server as well )
+2. Колекцію тестів для відкритого АРІ - petstore.collection.json (колекція не модифікувалась)
+3. Колекцію тестів для відкритого АРІ - StarWars3.collection.json (нова колекція)
 
-###  GH actions practice / Second Task
-9. Add Github action to run `petstore.collection.json` in Github pages by <a href="https://www.linkedin.com/pulse/running-postman-collections-via-github-action-nirmala-jayasanka"> article </a> or use another GH action.
-10. Check github actions for result.
+-
+-
+-
 
+## Як запустити тести колекцій на СI
 
-You can use another API to perform  your testing instead of local store API and `store.collection.json`. 
-- <a href="https://github.com/public-apis/public-apis"> Public API list </a>
+Тести можна запустити через пуш на репозиторій і гілку main, або вручну через Actions
 
-### Usefull links (skip this)
-Examples with different actions in Postman workspace (only take a look once, no need to learn this) 
-- <a href="https://www.postman.com/postman/workspace/postman-answers"> Postman answers </a>
-- <a href="https://restfulapi.net"> REST API Tutorial </a>
+📌 Інструкція для тих, хто зробив форк:
+Форкни цей репозиторій.
 
-Doc for json schema validation, to check output API response (only take a look once, no need to learn this doc) 
-- <a href="https://json-schema.org"> json schema docs </a>
+Перейди у вкладку Actions → Run workflow, вибери колекцію та натисни "Run workflow".
+
+Після завершення тесту репорт буде автоматично задеплоєно на GitHub Pages.
+
+Активуй GitHub Pages у Settings → Pages, обравши Deploy from GitHub Actions.
+
+Репорт відкриється за адресою:
+https://<твій-нік>.github.io/<твій-репозиторій>/
+
+## Звіт
+
+Звіт доступний за посиланням:
+
+Звіт деплоїться на окрему гілку gh-pages
+
+## Як розгорнути локально Store template
+
+1. Download this repo.
+2. Run `npm i` (install node.js dependencies)
+3. Run `npm run tern-on-api`(to run testing server locally )
+4. Upload `store.collection.json` in Postman app.
+
+## Початкова колекція та завдання тут
+
+<a href="https://svitla.com/blog/testing-rest-api-with-postman-and-curl"> Postman & Curl & REST article </a>

@@ -15,6 +15,11 @@ on:
           - petstore.collection.json
           - StarWars3.collection.json
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   run-postman-and-deploy:
     runs-on: ubuntu-latest
@@ -59,8 +64,10 @@ jobs:
             --reporter-htmlextra-export public/index.html \
             --reporter-htmlextra-darkTheme || true
 
-      - name: Deploy report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          path: ./public
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
